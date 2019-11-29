@@ -5,7 +5,11 @@ import json
 class SVM :
 
     def __init__(self):
-        self.SVM = svm.SVC(C=0.8, kernel='linear', degree=3, gamma='auto')
+        self.SVM = svm.SVC(C=0.8, 
+                kernel='linear', 
+                degree=3, 
+                gamma='auto',
+                verbose=True)
         self.encodeDict = {
                     0 : "negative",
                     1 : "positive"
@@ -14,7 +18,10 @@ class SVM :
     # vectorized train_x by TF-IDF
     def fit(self, train_x, train_y):
         self.SVM.fit(train_x, train_y)
-    
+
+    def get_support_vector(self): 
+        return self.SVM.support_vectors_
+
     # vectorized test_x by TF-IDF
     def predict(self, test_x):
         return self.SVM.predict(test_x) 
